@@ -10,7 +10,7 @@ if (isNull _unit) exitWith
 
 if (!isServer) exitWith
 {
-    if (!hasInterface || {_unit isNotEqualTo player}) exitWith
+    if (!hasInterface || {!(_unit isEqualTo player)}) exitWith
     {
         false
     };
@@ -25,7 +25,7 @@ if (isRemoteExecuted) then
 
     if (
         _callerOwner <= 2
-        || {owner _unit isNotEqualTo _callerOwner}
+        || {(owner _unit) != _callerOwner}
     ) exitWith
     {
         [
