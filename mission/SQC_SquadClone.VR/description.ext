@@ -1,0 +1,28 @@
+author = "Code4life69";
+onLoadName = "SQC - Squad Clone Foundation";
+onLoadMission = "AI-first Squad-inspired combined-arms framework";
+
+class CfgFunctions
+{
+    class SQC
+    {
+        tag = "SQC";
+
+        class Core
+        {
+            file = "Functions\\Core";
+
+            class preInit
+            {
+                preInit = 1;
+            };
+
+            class getExecutionRole {};
+            class log {};
+            class assert {};
+            class serverInit {};
+            class clientInit {};
+            class headlessInit {};
+        };
+    };
+};
