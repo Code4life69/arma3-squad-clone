@@ -1,4 +1,4 @@
-missionNamespace setVariable ["SQC_version", "0.5.0-arcade-combat"];
+missionNamespace setVariable ["SQC_version", "0.6.0-functional-classes"];
 
 missionNamespace setVariable ["SQC_spawnArenaCenter", [2915.2, 6164.52, 0]];
 missionNamespace setVariable ["SQC_spawnArenaRadius", 230];
@@ -14,6 +14,7 @@ missionNamespace setVariable ["SQC_spawnDeathHeat", []];
 missionNamespace setVariable ["SQC_spawnReady", false];
 
 missionNamespace setVariable ["SQC_selectedClass", "ASSAULT"];
+missionNamespace setVariable ["SQC_loadoutClasses", ["ASSAULT", "SMG", "LMG", "MARKSMAN", "SHOTGUN"]];
 missionNamespace setVariable ["SQC_matchScores", [0, 0]];
 missionNamespace setVariable ["SQC_matchTimeRemaining", 600];
 missionNamespace setVariable ["SQC_matchScoreLimit", 75];

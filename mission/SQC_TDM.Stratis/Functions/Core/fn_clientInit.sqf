@@ -43,6 +43,7 @@ missionNamespace setVariable ["SQC_didJIP", _didJIP];
 
     if (!isNull _unit && {alive _unit}) then
     {
+        [] call SQC_fnc_loadoutDeploySelected;
         [_unit] call SQC_fnc_requestSpawn;
     };
 
