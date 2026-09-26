@@ -1,15 +1,13 @@
-missionNamespace setVariable ["SQC_version", "0.4.0-tdm-core"];
+missionNamespace setVariable ["SQC_version", "0.5.0-arcade-combat"];
 
 missionNamespace setVariable ["SQC_spawnArenaCenter", [2915.2, 6164.52, 0]];
 missionNamespace setVariable ["SQC_spawnArenaRadius", 230];
 missionNamespace setVariable ["SQC_spawnGroundStep", 25];
-
 missionNamespace setVariable ["SQC_spawnEnemyHardMin", 18];
 missionNamespace setVariable ["SQC_spawnLOSRange", 120];
 missionNamespace setVariable ["SQC_spawnRefineCount", 24];
 missionNamespace setVariable ["SQC_spawnDeathMemorySeconds", 14];
 missionNamespace setVariable ["SQC_spawnReuseMemorySeconds", 10];
-
 missionNamespace setVariable ["SQC_spawnCandidates", []];
 missionNamespace setVariable ["SQC_spawnRecent", []];
 missionNamespace setVariable ["SQC_spawnDeathHeat", []];
@@ -34,5 +32,12 @@ missionNamespace setVariable ["SQC_nextBotId", 1];
 missionNamespace setVariable ["SQC_aiInitialized", false];
 missionNamespace setVariable ["SQC_aiPendingRespawns", []];
 
-["BOOT", "Spawn, UI, AI and TDM defaults loaded", "DEBUG"] call SQC_fnc_log;
+missionNamespace setVariable ["SQC_friendlyFire", false];
+missionNamespace setVariable ["SQC_damageScale", 0.86];
+missionNamespace setVariable ["SQC_healthRegenDelay", 5];
+missionNamespace setVariable ["SQC_playerAimCoef", 0.55];
+missionNamespace setVariable ["SQC_playerRecoilCoef", 0.75];
+missionNamespace setVariable ["SQC_combatLocalInitialized", false];
+
+["BOOT", "Spawn, UI, AI, TDM and arcade-combat defaults loaded", "DEBUG"] call SQC_fnc_log;
 true
