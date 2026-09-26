@@ -50,6 +50,8 @@ for token in [
 
 apply_class = (MISSION / "Functions/Loadout/fn_loadoutApplyClass.sqf").read_text(encoding="utf-8")
 for token in [
+    "isRemoteExecuted",
+    "remoteExecutedOwner != 2",
     '"arifle_MX_F"',
     '"SMG_01_F"',
     '"LMG_Mk200_F"',
