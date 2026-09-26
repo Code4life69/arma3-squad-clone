@@ -1,24 +1,22 @@
-# Arma 3 — AI Team Deathmatch
+# Arma 3 — AI Black Ops II-Style Team Deathmatch
 
-An AI-heavy, Black Ops II-inspired Team Deathmatch game mode built as an Arma 3 mission/server framework.
+Personal-use Arma 3 mission/server framework focused on recreating the fast feel of Black Ops II Team Deathmatch with an overwhelmingly AI-populated server.
 
-## Current direction
+## Priority order
 
-- Two teams.
-- Default target: 6v6 total combatants, with AI filling almost every slot.
-- Default score limit: 75 kills.
-- Default time limit: 10 minutes.
-- Fast respawn.
-- Server-authoritative scoring and match state.
-- Modern original HUD/menus inspired by early-2010s arcade military shooters.
-- No copied Call of Duty assets, UI art, audio, maps, or proprietary content.
+1. Dynamic spawn system
+2. BO2-style HUD and menus
+3. AI population/combat pacing
+4. TDM scoring, classes, kill feed, scorestreak-style systems and polish
 
-## Development rule
+Development follows one rule: finish one milestone, review it three ways, then move to the next.
 
-Build one milestone, finish it, verify it three ways, then move on.
+## Current milestone
 
-M001 is only the TDM match core. AI population, advanced spawning, loadouts, HUD, kill feed, scorestreaks and map polish come later.
+M001 — Dynamic Spawn Director
 
-See:
-- `docs/RESEARCH.md`
-- `docs/MISSION_PLAN.md`
+The first test map is Agia Marina on Stratis. The spawn director builds ground and building spawn candidates at runtime and chooses a spawn using team position, enemy pressure, recent deaths, recent spawn usage and real line-of-sight checks.
+
+No long spawn invulnerability is used to conceal bad spawn selection.
+
+See docs/MISSION_PLAN.md and docs/SPAWN_SYSTEM.md.

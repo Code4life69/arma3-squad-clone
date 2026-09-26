@@ -1,141 +1,139 @@
-# Mission Plan — AI-Heavy Black Ops II-Style TDM
+# Mission Plan — AI-Heavy BO2-Style TDM
 
-## Verification rule
+The project is designed around one human player with AI filling nearly all other combat slots.
 
-Every milestone must pass all three gates before the next begins:
+## Work rule
 
-1. **Architecture review** — multiplayer locality, authority and failure paths.
-2. **Automated static/syntax validation** — structure checks plus SQF parsing.
-3. **Engine smoke test** — hosted/dedicated checklist for behavior that only Arma can prove.
+Only one milestone is implemented at a time. Before moving forward it receives three independent checks:
 
-## M001 — TDM match core
+1. architecture/locality review
+2. automated structural and SQF syntax validation
+3. independent code-path review against the milestone invariants
 
-Build the smallest complete game-mode kernel:
+A real Arma hosted/dedicated smoke checklist is also kept for engine behavior.
 
-- VR test mission
-- BLUFOR and OPFOR playable slots
-- side respawn markers
-- BASE respawn
-- server-authoritative match state
+## M001 — Dynamic Spawn Director
+
+First production test area: Agia Marina, Stratis.
+
+Deliverables:
+
+- dynamically generated outdoor spawn candidates
+- building/interior spawn candidates
+- server-authoritative spawn selection
+- enemy-distance safety gate
+- friendly support preference
+- behind-the-team / away-from-enemy-front preference
+- recent-death danger heat
+- recent-spawn reuse penalty
+- expensive LOS checks only on finalists
+- small randomized choice among similarly excellent candidates
+- player respawn integration
+- AI-compatible placement API
+- no default spawn invulnerability
+- detailed server logging
+- automatic static and SQF validation
+
+The milestone is intentionally isolated from scoring, HUD, classes and AI population.
+
+## M002 — BO2-Style Visual Shell
+
+Using the supplied BO2 screenshots as the visual target:
+
+- dark translucent panels
+- orange selected-state accents
+- condensed bold typography
+- BO2-like menu hierarchy
+- multiplayer home screen
+- class/loadout screen
+- top-left minimap frame
+- bottom-left team score block
+- bottom-right ammo/equipment block
+- right-side streak stack
+- kill feed area
+- respawn transition
+- resolution-safe placement using Arma safeZone coordinates
+
+All art will be recreated from scratch rather than importing proprietary BO2 assets.
+
+## M003 — AI Team Population
+
+- default 6v6 match
+- AI fills every unoccupied slot
+- humans can replace AI slots
+- balanced teams
+- AI respawn uses the M001 spawn director
+- configurable difficulty
+- server-safe lifecycle handling
+
+## M004 — TDM Match Core
+
 - 75-kill default score limit
-- 10-minute default timer
-- enemy-kill scoring
-- teamkill/suicide rejection
-- replicated compact score/timer state
-- clean match end
-- RPT diagnostics
-- automated validation
+- 10-minute default time limit
+- server-authoritative score
+- kill/death tracking
+- teamkill and suicide rules
+- match end
+- scoreboard state
 
-Nothing else is allowed into M001.
+## M005 — Combat Pace
 
-## M002 — AI team population
+- respawn delay tuning
+- stamina policy
+- health/damage tuning
+- health regeneration decision
+- grenade/explosive balance
+- friendly-fire policy
+- AI accuracy/reaction profiles
 
-Target the real use case: about 95%+ AI.
-
-- configurable team size, default 6v6
-- AI fills empty human slots
-- balanced BLUFOR/OPFOR rosters
-- death replacement/respawn
-- server ownership registry
-- human joining does not duplicate a slot
-- optional difficulty profiles
-- no per-unit polling loops
-
-## M003 — Arcade spawn director
-
-This is one of the most important systems.
-
-- multiple spawn anchors per team
-- enemy-distance scoring
-- line-of-sight danger penalty
-- recent-death heat penalty
-- teammate-density bonus
-- avoid spawning directly behind/inside enemies
-- anti-spawn-trap fallback
-- short spawn protection
-- configurable respawn delay
-- AI and humans use the same spawn selector
-
-## M004 — Classes and loadouts
-
-BO2-style clarity without copying proprietary assets.
+## M006 — Classes and Loadouts
 
 - assault
 - SMG
 - LMG
-- marksman/sniper
+- sniper/marksman
 - shotgun
-- lightweight custom loadout system
-- weapon/attachment/perk-like gameplay modifiers where Arma supports them cleanly
-- AI role distribution
+- equipment
+- perk-like modifiers where Arma supports them cleanly
+- AI class distribution
 
-## M005 — Modern HUD, scoreboard and kill feed
-
-Original UI with an early-2010s competitive shooter feel.
-
-- team score at top center
-- remaining time
-- kill feed
-- personal kills/deaths/KD
-- full scoreboard
-- respawn countdown
-- class/loadout panel
-- end-match scoreboard
-
-## M006 — Combat pace conversion
-
-Tune Arma away from slow milsim pacing where appropriate.
-
-- stamina policy
-- movement tuning where safely scriptable
-- health/damage policy
-- healing/regeneration decision
-- grenade/explosive balance
-- friendly-fire policy
-- AI reaction and accuracy tuning
-
-## M007 — AI combat behavior
+## M007 — Arcade AI Behavior
 
 - aggressive lane movement
 - flanking
-- pressure toward enemy-controlled space
-- avoid excessive prone/static behavior
-- close-range building clearing
+- building clearing
+- pressure toward enemy space
+- less static/prone behavior
 - grenade use
-- lightweight squad grouping without Squad-style logistics/command overhead
+- lightweight team awareness
 
-## M008 — Scorestreak-style rewards
+## M008 — Scorestreak-Style Systems
 
-Optional and configurable.
-
-- server-validated streak points
-- UAV/radar-style information
-- counter-UAV-like denial
+- UAV/radar-style awareness
+- counter-radar denial
 - AI-controlled support effects
-- reset/retention rules
-- strict performance limits
+- server-validated streak progression
+- configurable enable/disable
 
-No proprietary BO2 assets or exact audiovisual copies.
+## M009 — Town/Map Layer System
 
-## M009 — Map/layer system
+Generalize the Agia Marina prototype so towns can become playable TDM arenas automatically.
 
-- compact combat areas cut from Arma terrains
-- per-map spawn anchor sets
-- boundaries
-- cover-density checks
-- sightline checks
-- 6v6 scale first
-- optional larger 9v9/12v12 profiles
+- location discovery
+- arena radius selection
+- building/road density scoring
+- generated spawn candidate cache
+- playable-boundary generation
+- per-town overrides
+- later map voting/random town selection
 
-## M010 — Polish and soak testing
+## M010 — Polish and Soak Tests
 
-- dedicated-server testing
 - JIP/reconnect
 - 30/60/120 minute bot matches
-- no script errors
-- score consistency audit
-- spawn-death rate analysis
-- server FPS metrics
+- spawn-death analytics
+- spawn reuse analytics
+- script error target: zero
+- server FPS measurements
 - UI polish
-- admin config
 - release documentation

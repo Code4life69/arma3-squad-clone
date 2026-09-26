@@ -1,0 +1,74 @@
+author = "Code4life69";
+onLoadName = "SQC - AI Team Deathmatch";
+onLoadMission = "Agia Marina dynamic spawn prototype";
+
+respawn = "BASE";
+respawnDelay = 2;
+respawnOnStart = 0;
+respawnDialog = 0;
+disabledAI = 0;
+joinUnassigned = 1;
+saving = 0;
+
+class CfgFunctions
+{
+    class SQC
+    {
+        tag = "SQC";
+
+        class Core
+        {
+            file = "Functions\Core";
+
+            class preInit
+            {
+                preInit = 1;
+            };
+
+            class getExecutionRole {};
+            class log {};
+            class serverInit {};
+            class clientInit {};
+        };
+
+        class Spawn
+        {
+            file = "Functions\Spawn";
+
+            class buildSpawnCandidates {};
+            class scoreSpawnCandidate {};
+            class selectSpawnPosition {};
+            class placeUnitAtSpawn {};
+            class requestSpawn {};
+            class applySpawn {};
+            class recordDeathSpot {};
+        };
+    };
+};
+
+class CfgRemoteExec
+{
+    class Functions
+    {
+        mode = 1;
+        jip = 0;
+
+        class SQC_fnc_requestSpawn
+        {
+            allowedTargets = 2;
+            jip = 0;
+        };
+
+        class SQC_fnc_applySpawn
+        {
+            allowedTargets = 1;
+            jip = 0;
+        };
+    };
+
+    class Commands
+    {
+        mode = 0;
+        jip = 0;
+    };
+};
