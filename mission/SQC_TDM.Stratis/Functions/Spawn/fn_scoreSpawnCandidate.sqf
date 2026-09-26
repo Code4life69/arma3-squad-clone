@@ -25,7 +25,7 @@ private _combatants = allUnits select
     alive _x
     && {_x isKindOf "CAManBase"}
     && {(side group _x) in [west, east]}
-    && {_x isNotEqualTo _unit}
+    && {!(_x isEqualTo _unit)}
 };
 
 private _friends = _combatants select
