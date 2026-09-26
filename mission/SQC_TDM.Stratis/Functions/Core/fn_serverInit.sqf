@@ -28,9 +28,37 @@ private _killedHandler = addMissionEventHandler
     }
 ];
 
-missionNamespace setVariable ["SQC_spawnKilledHandler", _killedHandler];
+private _respawnedHandler = addMissionEventHandler
+[
+    "EntityRespawned",
+    {
+        params ["_newEntity", "_oldEntity"];
 
-["BOOT", format ["Spawn director ready; EntityKilled EH=%1", _killedHandler], "INFO"] call SQC_fnc_log;
+        if (
+            !isNull _newEntity
+            && {alive _newEntity}
+            && {_newEntity isKindOf "CAManBase"}
+            && {(side group _newEntity) in [west, east]}
+        ) then
+        {
+            [_newEntity] call SQC_fnc_placeUnitAtSpawn;
+        };
+    }
+];
+
+missionNamespace setVariable ["SQC_spawnKilledHandler", _killedHandler];
+missionNamespace setVariable ["SQC_spawnRespawnedHandler", _respawnedHandler];
+
+[
+    "BOOT",
+    format
+    [
+        "Spawn director ready; EntityKilled EH=%1 EntityRespawned EH=%2",
+        _killedHandler,
+        _respawnedHandler
+    ],
+    "INFO"
+] call SQC_fnc_log;
 
 [] spawn
 {
