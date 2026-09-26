@@ -15,20 +15,25 @@ if (!isServer) exitWith
         false
     };
 
-    [_unit] remoteExecCall ["SQC_fnc_requestSpawn", 2];
+    [_unit] remoteExec ["SQC_fnc_requestSpawn", 2];
     true
 };
 
-if !(isNil "remoteExecutedOwner") then
+if (isRemoteExecuted) then
 {
-    if (remoteExecutedOwner >= 3 && {owner _unit isNotEqualTo remoteExecutedOwner}) exitWith
+    private _callerOwner = remoteExecutedOwner;
+
+    if (
+        _callerOwner <= 2
+        || {owner _unit isNotEqualTo _callerOwner}
+    ) exitWith
     {
         [
             "SPAWN",
             format
             [
-                "Rejected spoofed spawn request: caller=%1 owner=%2",
-                remoteExecutedOwner,
+                "Rejected initial spawn request: caller=%1 owner=%2",
+                _callerOwner,
                 owner _unit
             ],
             "WARNING"
@@ -42,5 +47,13 @@ if !((side group _unit) in [west, east]) exitWith
 {
     false
 };
+
+if (_unit getVariable ["SQC_initialSpawnDone", false]) exitWith
+{
+    ["SPAWN", "Duplicate initial spawn request ignored", "DEBUG"] call SQC_fnc_log;
+    false
+};
+
+_unit setVariable ["SQC_initialSpawnDone", true, true];
 
 [_unit] call SQC_fnc_placeUnitAtSpawn
