@@ -4,7 +4,7 @@ onLoadMission = "Agia Marina dynamic spawn prototype";
 
 respawn = "BASE";
 respawnDelay = 2;
-respawnOnStart = 0;
+respawnOnStart = -1;
 respawnDialog = 0;
 disabledAI = 0;
 joinUnassigned = 1;
@@ -52,6 +52,36 @@ class CfgRemoteExec
     {
         mode = 1;
         jip = 0;
+
+        class BIS_fnc_effectKilledAirDestruction
+        {
+            allowedTargets = 0;
+            jip = 0;
+        };
+
+        class BIS_fnc_effectKilledSecondaries
+        {
+            allowedTargets = 0;
+            jip = 0;
+        };
+
+        class BIS_fnc_fire
+        {
+            allowedTargets = 0;
+            jip = 0;
+        };
+
+        class BIS_fnc_objectVar
+        {
+            allowedTargets = 0;
+            jip = 0;
+        };
+
+        class BIS_fnc_setCustomSoundController
+        {
+            allowedTargets = 0;
+            jip = 0;
+        };
 
         class SQC_fnc_requestSpawn
         {
