@@ -1,4 +1,4 @@
-missionNamespace setVariable ["SQC_version", "0.1.0-spawn-director"];
+missionNamespace setVariable ["SQC_version", "0.2.0-visual-shell"];
 
 missionNamespace setVariable ["SQC_spawnArenaCenter", [2915.2, 6164.52, 0]];
 missionNamespace setVariable ["SQC_spawnArenaRadius", 230];
@@ -15,5 +15,10 @@ missionNamespace setVariable ["SQC_spawnRecent", []];
 missionNamespace setVariable ["SQC_spawnDeathHeat", []];
 missionNamespace setVariable ["SQC_spawnReady", false];
 
-["BOOT", "Spawn director configuration loaded", "DEBUG"] call SQC_fnc_log;
+missionNamespace setVariable ["SQC_selectedClass", "ASSAULT"];
+missionNamespace setVariable ["SQC_matchScores", [0, 0]];
+missionNamespace setVariable ["SQC_matchTimeRemaining", 600];
+missionNamespace setVariable ["SQC_matchScoreLimit", 75];
+
+["BOOT", "Spawn director and visual-shell defaults loaded", "DEBUG"] call SQC_fnc_log;
 true

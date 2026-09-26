@@ -20,6 +20,8 @@ missionNamespace setVariable ["SQC_didJIP", _didJIP];
 
 ["BOOT", format ["Client ready; JIP=%1", _didJIP], "INFO"] call SQC_fnc_log;
 
+[] call SQC_fnc_uiInit;
+
 [_player] spawn
 {
     params ["_unit"];
@@ -41,6 +43,15 @@ missionNamespace setVariable ["SQC_didJIP", _didJIP];
     {
         [_unit] call SQC_fnc_requestSpawn;
     };
+
+    waitUntil
+    {
+        sleep 0.05;
+        !isNull (findDisplay 46)
+    };
+
+    sleep 0.20;
+    [] call SQC_fnc_uiOpenMenu;
 };
 
 true
