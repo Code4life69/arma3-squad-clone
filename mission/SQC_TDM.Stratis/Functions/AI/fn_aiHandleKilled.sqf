@@ -17,13 +17,19 @@ if !(_unit getVariable ["SQC_managedBot", false]) exitWith
 };
 
 private _group = group _unit;
+private _side = side group _unit;
 private _respawnDelay = missionNamespace getVariable ["SQC_aiRespawnDelay", 2];
 private _cleanupDelay = missionNamespace getVariable ["SQC_aiCorpseCleanupDelay", 10];
 
-[] spawn
+private _pending = missionNamespace getVariable ["SQC_aiPendingRespawns", []];
+_pending pushBack [_side, serverTime + _respawnDelay];
+missionNamespace setVariable ["SQC_aiPendingRespawns", _pending];
+
+[_respawnDelay] spawn
 {
-    private _delay = missionNamespace getVariable ["SQC_aiRespawnDelay", 2];
-    sleep _delay;
+    params ["_delay"];
+
+    sleep (_delay + 0.05);
     [] call SQC_fnc_aiReconcile;
 };
 
