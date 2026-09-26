@@ -10,8 +10,7 @@ private _teamSize = missionNamespace getVariable ["SQC_aiTeamSize", 6];
 
     private _humans = allPlayers select
     {
-        alive _x
-        && {!(_x isKindOf "HeadlessClient_F")}
+        !(_x isKindOf "HeadlessClient_F")
         && {(side group _x) isEqualTo _side}
     };
 
