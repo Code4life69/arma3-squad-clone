@@ -1,0 +1,168 @@
+version=53;
+class EditorData
+{
+    moveGridStep=1;
+    angleGridStep=0.2617994;
+    scaleGridStep=1;
+    autoGroupingDist=10;
+    toggles=1;
+
+    class ItemIDProvider
+    {
+        nextID=6;
+    };
+
+    class MarkerIDProvider
+    {
+        nextID=2;
+    };
+
+    class Camera
+    {
+        pos[]={2915.2,120,6164.52};
+        dir[]={0,-0.7,0.7};
+        up[]={0,0.7,0.7};
+        aside[]={1,0,0};
+    };
+};
+
+binarizationWanted=0;
+
+addons[]=
+{
+    "A3_Characters_F",
+    "A3_Map_Stratis"
+};
+
+randomSeed=260926;
+
+class ScenarioData
+{
+    author="Code4life69";
+};
+
+class Mission
+{
+    class Intel
+    {
+        timeOfChanges=1800.0002;
+        startWeather=0;
+        startWind=0.1;
+        startWaves=0.1;
+        forecastWeather=0;
+        forecastWind=0.1;
+        forecastWaves=0.1;
+        forecastLightnings=0;
+        year=2035;
+        month=6;
+        day=28;
+        hour=12;
+        minute=0;
+        startFogDecay=0.014;
+        forecastFogDecay=0.014;
+    };
+
+    class Entities
+    {
+        items=4;
+
+        class Item0
+        {
+            dataType="Marker";
+            position[]={2890,0,6165};
+            name="respawn_west";
+            type="Empty";
+            id=0;
+        };
+
+        class Item1
+        {
+            dataType="Marker";
+            position[]={2940,0,6165};
+            name="respawn_east";
+            type="Empty";
+            id=1;
+        };
+
+        class Item2
+        {
+            dataType="Group";
+            side="West";
+
+            class Entities
+            {
+                items=1;
+
+                class Item0
+                {
+                    dataType="Object";
+
+                    class PositionInfo
+                    {
+                        position[]={2890,0,6165};
+                    };
+
+                    side="West";
+                    flags=7;
+
+                    class Attributes
+                    {
+                        rank="SERGEANT";
+                        description="WEST";
+                        isPlayer=1;
+                        isPlayable=1;
+                    };
+
+                    id=3;
+                    type="B_Soldier_F";
+                };
+            };
+
+            class Attributes
+            {
+            };
+
+            id=2;
+        };
+
+        class Item3
+        {
+            dataType="Group";
+            side="East";
+
+            class Entities
+            {
+                items=1;
+
+                class Item0
+                {
+                    dataType="Object";
+
+                    class PositionInfo
+                    {
+                        position[]={2940,0,6165};
+                    };
+
+                    side="East";
+                    flags=6;
+
+                    class Attributes
+                    {
+                        rank="SERGEANT";
+                        description="EAST";
+                        isPlayable=1;
+                    };
+
+                    id=5;
+                    type="O_Soldier_F";
+                };
+            };
+
+            class Attributes
+            {
+            };
+
+            id=4;
+        };
+    };
+};
