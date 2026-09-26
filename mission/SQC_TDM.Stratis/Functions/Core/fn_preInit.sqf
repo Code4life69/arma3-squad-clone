@@ -27,6 +27,7 @@ missionNamespace setVariable ["SQC_aiClassWest", "B_Soldier_F"];
 missionNamespace setVariable ["SQC_aiClassEast", "O_Soldier_F"];
 missionNamespace setVariable ["SQC_nextBotId", 1];
 missionNamespace setVariable ["SQC_aiInitialized", false];
+missionNamespace setVariable ["SQC_aiPendingRespawns", []];
 
 ["BOOT", "Spawn, UI and AI population defaults loaded", "DEBUG"] call SQC_fnc_log;
 true
