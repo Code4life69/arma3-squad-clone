@@ -18,9 +18,11 @@ if (isNull _player) exitWith
 missionNamespace setVariable ["SQC_localPlayer", _player];
 missionNamespace setVariable ["SQC_didJIP", _didJIP];
 
-["BOOT", format ["Client ready; JIP=%1", _didJIP], "INFO"] call SQC_fnc_log;
-
+[] call SQC_fnc_combatInitLocal;
+[_player] call SQC_fnc_combatApplyUnit;
 [] call SQC_fnc_uiInit;
+
+["BOOT", format ["Client ready; JIP=%1", _didJIP], "INFO"] call SQC_fnc_log;
 
 [_player] spawn
 {

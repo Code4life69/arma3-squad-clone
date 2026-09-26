@@ -20,6 +20,8 @@ if (!_built) exitWith
 
 missionNamespace setVariable ["SQC_serverReady", true];
 
+[] call SQC_fnc_combatInitLocal;
+
 private _killedHandler = addMissionEventHandler
 [
     "EntityKilled",

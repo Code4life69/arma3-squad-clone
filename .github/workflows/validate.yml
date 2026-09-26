@@ -29,6 +29,9 @@ jobs:
       - name: Validate TDM match core
         run: python tests/validate_match_core.py
 
+      - name: Validate arcade combat pace
+        run: python tests/validate_combat_pace.py
+
       - name: Install SQF parser
         run: python -m pip install sqflint==0.3.2
 

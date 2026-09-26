@@ -63,12 +63,7 @@ class CfgFunctions
         class Core
         {
             file = "Functions\Core";
-
-            class preInit
-            {
-                preInit = 1;
-            };
-
+            class preInit { preInit = 1; };
             class getExecutionRole {};
             class log {};
             class serverInit {};
@@ -78,7 +73,6 @@ class CfgFunctions
         class Spawn
         {
             file = "Functions\Spawn";
-
             class buildSpawnCandidates {};
             class scoreSpawnCandidate {};
             class selectSpawnPosition {};
@@ -91,7 +85,6 @@ class CfgFunctions
         class UI
         {
             file = "Functions\UI";
-
             class uiInit {};
             class uiUpdateHud {};
             class uiMapDraw {};
@@ -104,7 +97,6 @@ class CfgFunctions
         class AI
         {
             file = "Functions\AI";
-
             class aiInit {};
             class aiReconcile {};
             class aiSpawnBot {};
@@ -115,12 +107,19 @@ class CfgFunctions
         class Match
         {
             file = "Functions\Match";
-
             class matchInit {};
             class matchHandleKill {};
             class matchUpdatePlayerStat {};
             class matchBroadcastKillFeed {};
             class matchEnd {};
+        };
+
+        class Combat
+        {
+            file = "Functions\Combat";
+            class combatInitLocal {};
+            class combatApplyUnit {};
+            class combatHandleDamage {};
         };
     };
 };
@@ -132,53 +131,15 @@ class CfgRemoteExec
         mode = 1;
         jip = 0;
 
-        class BIS_fnc_effectKilledAirDestruction
-        {
-            allowedTargets = 0;
-            jip = 0;
-        };
+        class BIS_fnc_effectKilledAirDestruction { allowedTargets = 0; jip = 0; };
+        class BIS_fnc_effectKilledSecondaries { allowedTargets = 0; jip = 0; };
+        class BIS_fnc_fire { allowedTargets = 0; jip = 0; };
+        class BIS_fnc_objectVar { allowedTargets = 0; jip = 0; };
+        class BIS_fnc_setCustomSoundController { allowedTargets = 0; jip = 0; };
 
-        class BIS_fnc_effectKilledSecondaries
-        {
-            allowedTargets = 0;
-            jip = 0;
-        };
-
-        class BIS_fnc_fire
-        {
-            allowedTargets = 0;
-            jip = 0;
-        };
-
-        class BIS_fnc_objectVar
-        {
-            allowedTargets = 0;
-            jip = 0;
-        };
-
-        class BIS_fnc_setCustomSoundController
-        {
-            allowedTargets = 0;
-            jip = 0;
-        };
-
-        class SQC_fnc_requestSpawn
-        {
-            allowedTargets = 2;
-            jip = 0;
-        };
-
-        class SQC_fnc_applySpawn
-        {
-            allowedTargets = 1;
-            jip = 0;
-        };
-
-        class SQC_fnc_uiPushKillFeed
-        {
-            allowedTargets = 1;
-            jip = 0;
-        };
+        class SQC_fnc_requestSpawn { allowedTargets = 2; jip = 0; };
+        class SQC_fnc_applySpawn { allowedTargets = 1; jip = 0; };
+        class SQC_fnc_uiPushKillFeed { allowedTargets = 1; jip = 0; };
     };
 
     class Commands
