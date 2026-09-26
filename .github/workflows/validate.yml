@@ -20,6 +20,9 @@ jobs:
       - name: Validate spawn architecture
         run: python tests/validate_spawn_system.py
 
+      - name: Validate BO2 visual shell
+        run: python tests/validate_ui_shell.py
+
       - name: Install SQF parser
         run: python -m pip install sqflint==0.3.2
 

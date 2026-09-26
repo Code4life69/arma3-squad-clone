@@ -1,6 +1,6 @@
 author = "Code4life69";
 onLoadName = "SQC - AI Team Deathmatch";
-onLoadMission = "Agia Marina dynamic spawn prototype";
+onLoadMission = "BO2-style AI Team Deathmatch in Agia Marina";
 
 respawn = "BASE";
 respawnDelay = 2;
@@ -9,6 +9,16 @@ respawnDialog = 0;
 disabledAI = 0;
 joinUnassigned = 1;
 saving = 0;
+
+class RscMapControl;
+
+#include "UI\BaseControls.hpp"
+#include "UI\Menu.hpp"
+
+class RscTitles
+{
+    #include "UI\HUD.hpp"
+};
 
 class CfgFunctions
 {
@@ -42,6 +52,19 @@ class CfgFunctions
             class requestSpawn {};
             class applySpawn {};
             class recordDeathSpot {};
+        };
+
+        class UI
+        {
+            file = "Functions\UI";
+
+            class uiInit {};
+            class uiUpdateHud {};
+            class uiMapDraw {};
+            class uiOpenMenu {};
+            class uiSelectClass {};
+            class uiRefreshMenu {};
+            class uiPushKillFeed {};
         };
     };
 };
