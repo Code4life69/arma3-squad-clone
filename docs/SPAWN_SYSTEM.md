@@ -62,13 +62,24 @@ Recent same-team spawn usage remains relevant for 10 seconds.
 
 These memories are server-only and pruned continuously.
 
-## Networking
+## Server authority
 
-The server selects every spawn.
+Candidate generation and selection happen on the server.
 
-A player client may only request a spawn for the unit that client owns. The server validates ownership and side before selecting a position. The resulting placement is sent only to the machine that owns the unit.
+Initial human join:
+- the player client requests one initial placement
+- the server checks isRemoteExecuted, remoteExecutedOwner and object owner
+- the unit is marked SQC_initialSpawnDone so the request cannot be reused as a teleport
 
-AI already local to the server uses the same placement function directly.
+Normal respawns:
+- the server's EntityRespawned mission event selects the spawn directly
+- no client spawn request is trusted or required
+
+AI initial placement:
+- the server places non-player combatants directly
+- future AI respawns use the same placeUnitAtSpawn path
+
+The final setPosATL executes only where the unit is local.
 
 ## No default invulnerability
 
