@@ -31,15 +31,19 @@ private _buildings = nearestTerrainObjects
         if (
             (_pos distance2D _center) <= _radius
             && {!surfaceIsWater _pos}
-            && {_pos isNotEqualTo [0, 0, 0]}
+            && {!(_pos isEqualTo [0, 0, 0])}
         ) then
         {
-            private _duplicateIndex = _candidates findIf
-            {
-                ((_x select 0) distance2D _pos) < 2.5
-            };
+            private _duplicate = false;
 
-            if (_duplicateIndex < 0) then
+            {
+                if (((_x select 0) distance2D _pos) < 2.5) exitWith
+                {
+                    _duplicate = true;
+                };
+            } forEach _candidates;
+
+            if (!_duplicate) then
             {
                 _candidates pushBack [_pos, "BUILDING", _building];
                 _buildingCount = _buildingCount + 1;
@@ -63,16 +67,20 @@ for "_dx" from (-_radius) to _radius step _step do
         {
             private _pos = _seed findEmptyPosition [1.0, 10, "B_Soldier_F"];
 
-            if (_pos isNotEqualTo [] && {(_pos distance2D _center) <= _radius} && {!surfaceIsWater _pos}) then
+            if (!(_pos isEqualTo []) && {(_pos distance2D _center) <= _radius} && {!surfaceIsWater _pos}) then
             {
                 _pos set [2, 0];
 
-                private _duplicateIndex = _candidates findIf
-                {
-                    ((_x select 0) distance2D _pos) < 4
-                };
+                private _duplicate = false;
 
-                if (_duplicateIndex < 0) then
+                {
+                    if (((_x select 0) distance2D _pos) < 4) exitWith
+                    {
+                        _duplicate = true;
+                    };
+                } forEach _candidates;
+
+                if (!_duplicate) then
                 {
                     _candidates pushBack [_pos, "GROUND", objNull];
                     _groundCount = _groundCount + 1;
