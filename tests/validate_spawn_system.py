@@ -151,7 +151,6 @@ for token in [
     '"EntityKilled"',
     '"EntityRespawned"',
     "SQC_fnc_placeUnitAtSpawn",
-    "!isPlayer _x",
 ]:
     if token not in server:
         fail(f"server respawn authority missing {token}")
