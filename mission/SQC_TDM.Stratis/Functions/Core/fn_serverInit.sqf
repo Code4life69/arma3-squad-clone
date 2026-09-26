@@ -25,6 +25,7 @@ private _killedHandler = addMissionEventHandler
     "EntityKilled",
     {
         _this call SQC_fnc_recordDeathSpot;
+        _this call SQC_fnc_aiHandleKilled;
     }
 ];
 
@@ -49,31 +50,17 @@ private _respawnedHandler = addMissionEventHandler
 missionNamespace setVariable ["SQC_spawnKilledHandler", _killedHandler];
 missionNamespace setVariable ["SQC_spawnRespawnedHandler", _respawnedHandler];
 
+[] call SQC_fnc_aiInit;
+
 [
     "BOOT",
     format
     [
-        "Spawn director ready; EntityKilled EH=%1 EntityRespawned EH=%2",
+        "Runtime ready; EntityKilled EH=%1 EntityRespawned EH=%2",
         _killedHandler,
         _respawnedHandler
     ],
     "INFO"
 ] call SQC_fnc_log;
-
-[] spawn
-{
-    sleep 1;
-
-    {
-        if (
-            alive _x
-            && {!isPlayer _x}
-            && {(side group _x) in [west, east]}
-        ) then
-        {
-            [_x] call SQC_fnc_placeUnitAtSpawn;
-        };
-    } forEach allUnits;
-};
 
 true

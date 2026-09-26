@@ -1,4 +1,4 @@
-missionNamespace setVariable ["SQC_version", "0.2.0-visual-shell"];
+missionNamespace setVariable ["SQC_version", "0.3.0-ai-population"];
 
 missionNamespace setVariable ["SQC_spawnArenaCenter", [2915.2, 6164.52, 0]];
 missionNamespace setVariable ["SQC_spawnArenaRadius", 230];
@@ -20,5 +20,14 @@ missionNamespace setVariable ["SQC_matchScores", [0, 0]];
 missionNamespace setVariable ["SQC_matchTimeRemaining", 600];
 missionNamespace setVariable ["SQC_matchScoreLimit", 75];
 
-["BOOT", "Spawn director and visual-shell defaults loaded", "DEBUG"] call SQC_fnc_log;
+missionNamespace setVariable ["SQC_aiTeamSize", 6];
+missionNamespace setVariable ["SQC_aiRespawnDelay", 2];
+missionNamespace setVariable ["SQC_aiCorpseCleanupDelay", 10];
+missionNamespace setVariable ["SQC_aiClassWest", "B_Soldier_F"];
+missionNamespace setVariable ["SQC_aiClassEast", "O_Soldier_F"];
+missionNamespace setVariable ["SQC_nextBotId", 1];
+missionNamespace setVariable ["SQC_aiInitialized", false];
+missionNamespace setVariable ["SQC_aiPendingRespawns", []];
+
+["BOOT", "Spawn, UI and AI population defaults loaded", "DEBUG"] call SQC_fnc_log;
 true
