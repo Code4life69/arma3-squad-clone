@@ -91,8 +91,7 @@ respawn = (MISSION / "onPlayerRespawn.sqf").read_text(encoding="utf-8")
 if "SQC_fnc_combatApplyUnit" not in respawn:
     fail("respawned human unit is not reconfigured for arcade combat")
 
-if "allowDamage false" in "
-".join(p.read_text(encoding="utf-8") for p in REQUIRED):
+if "allowDamage false" in "\n".join(p.read_text(encoding="utf-8") for p in REQUIRED):
     fail("combat pace must not add spawn invulnerability")
 
 print("PASS: M005 arcade combat pace invariants validated")
