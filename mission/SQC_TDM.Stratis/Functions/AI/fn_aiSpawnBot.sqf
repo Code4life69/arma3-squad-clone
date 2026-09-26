@@ -65,6 +65,7 @@ _unit setSkill ["spotTime", 0.55];
 _unit setSkill ["courage", 0.80];
 
 [_unit] call SQC_fnc_combatApplyUnit;
+[_unit] call SQC_fnc_loadoutAssignBot;
 [_unit] call SQC_fnc_placeUnitAtSpawn;
 
 [

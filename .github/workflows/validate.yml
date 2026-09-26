@@ -32,6 +32,9 @@ jobs:
       - name: Validate arcade combat pace
         run: python tests/validate_combat_pace.py
 
+      - name: Validate functional classes
+        run: python tests/validate_loadouts.py
+
       - name: Install SQF parser
         run: python -m pip install sqflint==0.3.2
 

@@ -121,6 +121,16 @@ class CfgFunctions
             class combatApplyUnit {};
             class combatHandleDamage {};
         };
+
+        class Loadout
+        {
+            file = "Functions\Loadout";
+            class loadoutRequestClass {};
+            class loadoutApplyClass {};
+            class loadoutHandleRespawn {};
+            class loadoutAssignBot {};
+            class loadoutDeploySelected {};
+        };
     };
 };
 
@@ -140,6 +150,8 @@ class CfgRemoteExec
         class SQC_fnc_requestSpawn { allowedTargets = 2; jip = 0; };
         class SQC_fnc_applySpawn { allowedTargets = 1; jip = 0; };
         class SQC_fnc_uiPushKillFeed { allowedTargets = 1; jip = 0; };
+        class SQC_fnc_loadoutRequestClass { allowedTargets = 2; jip = 0; };
+        class SQC_fnc_loadoutApplyClass { allowedTargets = 1; jip = 0; };
     };
 
     class Commands

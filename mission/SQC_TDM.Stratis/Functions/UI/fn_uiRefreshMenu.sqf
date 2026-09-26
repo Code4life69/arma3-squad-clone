@@ -79,7 +79,7 @@ switch (_selected) do
 (_display displayCtrl 7832) ctrlSetText _weapon;
 (_display displayCtrl 7833) ctrlSetStructuredText parseText format
 [
-    "<t color='#EEF0F2' size='1.0'>%1</t><br/><br/><t color='#8E949A' size='0.78'>LOADOUT APPLICATION ARRIVES IN THE CLASS MILESTONE.</t>",
+    "<t color='#EEF0F2' size='1.0'>%1</t><br/><br/><t color='#8E949A' size='0.78'>PRESS DEPLOY TO APPLY THIS LOADOUT.</t>",
     _role
 ];
 

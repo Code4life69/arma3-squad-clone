@@ -144,7 +144,7 @@ class SQC_Menu
             colorBackground[] = {0.95,0.34,0.035,0.94};
             colorBackgroundActive[] = {1.00,0.45,0.08,1};
             colorFocused[] = {1.00,0.45,0.08,1};
-            onButtonClick = "closeDialog 0;";
+            onButtonClick = "[] call SQC_fnc_loadoutDeploySelected; closeDialog 0;";
         };
 
         class ClassHeader : SQC_RscText
