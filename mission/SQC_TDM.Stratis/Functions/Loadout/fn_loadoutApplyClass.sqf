@@ -9,6 +9,12 @@ if (isNull _unit || {!local _unit}) exitWith
     false
 };
 
+if (isRemoteExecuted && {remoteExecutedOwner != 2}) exitWith
+{
+    ["LOADOUT", format ["Rejected remote loadout apply from owner %1", remoteExecutedOwner], "WARNING"] call SQC_fnc_log;
+    false
+};
+
 private _allowed = missionNamespace getVariable
 [
     "SQC_loadoutClasses",
