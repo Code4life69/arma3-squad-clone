@@ -26,6 +26,9 @@ jobs:
       - name: Validate AI population
         run: python tests/validate_ai_population.py
 
+      - name: Validate TDM match core
+        run: python tests/validate_match_core.py
+
       - name: Install SQF parser
         run: python -m pip install sqflint==0.3.2
 

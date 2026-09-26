@@ -25,6 +25,7 @@ private _killedHandler = addMissionEventHandler
     "EntityKilled",
     {
         _this call SQC_fnc_recordDeathSpot;
+        _this call SQC_fnc_matchHandleKill;
         _this call SQC_fnc_aiHandleKilled;
     }
 ];
@@ -51,6 +52,7 @@ missionNamespace setVariable ["SQC_spawnKilledHandler", _killedHandler];
 missionNamespace setVariable ["SQC_spawnRespawnedHandler", _respawnedHandler];
 
 [] call SQC_fnc_aiInit;
+[] call SQC_fnc_matchInit;
 
 [
     "BOOT",

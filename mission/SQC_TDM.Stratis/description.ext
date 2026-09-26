@@ -9,6 +9,7 @@ respawnDialog = 0;
 disabledAI = 1;
 joinUnassigned = 1;
 saving = 0;
+aiKills = 1;
 
 import RscMapControl;
 
@@ -18,6 +19,39 @@ import RscMapControl;
 class RscTitles
 {
     #include "UI\HUD.hpp"
+};
+
+class CfgDebriefing
+{
+    class TDM_WEST_WIN
+    {
+        title = "WEST TEAM WINS";
+        subtitle = "TEAM DEATHMATCH";
+        description = "Final score reached.";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0.25,0.80,0.95,1};
+    };
+
+    class TDM_EAST_WIN
+    {
+        title = "EAST TEAM WINS";
+        subtitle = "TEAM DEATHMATCH";
+        description = "Final score reached.";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0.95,0.34,0.035,1};
+    };
+
+    class TDM_DRAW
+    {
+        title = "DRAW";
+        subtitle = "TEAM DEATHMATCH";
+        description = "Time expired with equal scores.";
+        pictureBackground = "";
+        picture = "";
+        pictureColor[] = {0.8,0.8,0.8,1};
+    };
 };
 
 class CfgFunctions
@@ -77,6 +111,17 @@ class CfgFunctions
             class aiRetireBot {};
             class aiHandleKilled {};
         };
+
+        class Match
+        {
+            file = "Functions\Match";
+
+            class matchInit {};
+            class matchHandleKill {};
+            class matchUpdatePlayerStat {};
+            class matchBroadcastKillFeed {};
+            class matchEnd {};
+        };
     };
 };
 
@@ -124,6 +169,12 @@ class CfgRemoteExec
         };
 
         class SQC_fnc_applySpawn
+        {
+            allowedTargets = 1;
+            jip = 0;
+        };
+
+        class SQC_fnc_uiPushKillFeed
         {
             allowedTargets = 1;
             jip = 0;
