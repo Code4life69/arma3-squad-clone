@@ -78,6 +78,9 @@ for fn in [
     if f"class {fn}" not in description:
         fail(f"CfgFunctions missing {fn}")
 
+if 'respawnOnStart = -1;' not in description:
+    fail("mission-start respawn event must be disabled to avoid duplicate initial placement")
+
 if "class CfgRemoteExec" not in description:
     fail("CfgRemoteExec is missing")
 
@@ -133,13 +136,29 @@ if "selectRandom _selectionPool" not in selector:
     fail("selector missing constrained finalist randomization")
 
 request = (MISSION / "Functions/Spawn/fn_requestSpawn.sqf").read_text(encoding="utf-8")
-for token in ["remoteExecutedOwner", "owner _unit", "remoteExecCall", "player"]:
+for token in [
+    "isRemoteExecuted",
+    "remoteExecutedOwner",
+    "owner _unit",
+    'remoteExec ["SQC_fnc_requestSpawn", 2]',
+    "SQC_initialSpawnDone",
+]:
     if token not in request:
-        fail(f"spawn request validation missing {token}")
+        fail(f"initial spawn request validation missing {token}")
+
+server = (MISSION / "Functions/Core/fn_serverInit.sqf").read_text(encoding="utf-8")
+for token in [
+    '"EntityKilled"',
+    '"EntityRespawned"',
+    "SQC_fnc_placeUnitAtSpawn",
+    "!isPlayer _x",
+]:
+    if token not in server:
+        fail(f"server respawn authority missing {token}")
 
 respawn = (MISSION / "onPlayerRespawn.sqf").read_text(encoding="utf-8")
-if "SQC_fnc_requestSpawn" not in respawn:
-    fail("player respawn script does not use spawn director")
+if "SQC_fnc_requestSpawn" in respawn:
+    fail("onPlayerRespawn must not independently request a second placement")
 
 all_spawn_sqf = "\n".join(
     p.read_text(encoding="utf-8")
