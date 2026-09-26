@@ -41,6 +41,7 @@ for token in [
     '"SQC_aiRespawnDelay", 2',
     '"SQC_aiCorpseCleanupDelay", 10',
     '"SQC_nextBotId", 1',
+    '"SQC_aiPendingRespawns", []',
 ]:
     if token not in preinit:
         fail(f"AI config missing {token}")
@@ -58,6 +59,8 @@ for token in [
     "allPlayers",
     "allUnits",
     "SQC_managedBot",
+    "SQC_aiPendingRespawns",
+    "_effectiveBots",
     "SQC_fnc_aiSpawnBot",
     "SQC_fnc_aiRetireBot",
 ]:
@@ -74,6 +77,15 @@ for token in [
 ]:
     if token not in spawn:
         fail(f"bot spawn missing {token}")
+
+killed = (MISSION / "Functions/AI/fn_aiHandleKilled.sqf").read_text(encoding="utf-8")
+for token in [
+    "SQC_aiPendingRespawns",
+    "serverTime + _respawnDelay",
+    "sleep (_delay + 0.05)",
+]:
+    if token not in killed:
+        fail(f"bot death delay protection missing {token}")
 
 # The only long-running AI population loop belongs in aiInit.
 for path in REQUIRED[1:]:
