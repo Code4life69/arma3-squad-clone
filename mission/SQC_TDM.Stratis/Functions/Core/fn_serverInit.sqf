@@ -45,6 +45,7 @@ private _respawnedHandler = addMissionEventHandler
             && {(side group _newEntity) in [west, east]}
         ) then
         {
+            [_newEntity, _oldEntity] call SQC_fnc_loadoutHandleRespawn;
             [_newEntity] call SQC_fnc_placeUnitAtSpawn;
         };
     }
