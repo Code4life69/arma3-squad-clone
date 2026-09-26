@@ -35,9 +35,9 @@ def fail(message: str) -> None:
 
 
 def sanitized(text: str) -> str:
-    text = re.sub(r"/\*.*?\*/", "", text, flags=re.S)
-    text = re.sub(r"//.*", "", text)
-    text = re.sub(r'"(?:""|[^"\n])*"', '""', text)
+    # Consume strings before comments so UI text containing // stays a string.
+    pattern = r'"(?:""|[^"\n])*"|/\*.*?\*/|//[^\n]*'
+    text = re.sub(pattern, lambda m: '""' if m.group().startswith('"') else '', text, flags=re.S)
     return text
 
 

@@ -1,26 +1,30 @@
 name: Validate Arma mission
-
 on:
   push:
   pull_request:
-
+permissions:
+  contents: read
 jobs:
   validate:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-
-      - name: Set up Python
-        uses: actions/setup-python@v5
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
         with:
-          python-version: "3.11"
-
-      - name: Validate project structure and M001 invariants
-        run: python tests/validate_structure.py
-
-      - name: Install SQF linter
-        run: python -m pip install sqflint==0.3.2
-
-      - name: Parse SQF for syntax errors
-        run: sqflint -d mission/SQC_SquadClone.VR -e e
+          python-version: '3.11'
+      - name: Install pinned SQF-VM
+        run: python tools/fetch_sqfvm.py
+      - name: Validate both mission structures and locality contracts
+        run: python tests/validate_arena.py
+      - name: Parse all SQF scripts
+        run: python tests/lint_sqf.py
+      - name: Execute pure SQF gameplay regression tests
+        run: python -m unittest discover -s tests -p 'test_*.py' -v
+      - name: Package mission
+        run: python tools/package_mission.py
+      - name: Check committed package matches source
+        run: git diff --exit-code -- releases/BLACKLINE-Multiplayer.zip
+      - uses: actions/upload-artifact@v4
+        with:
+          name: BLACKLINE-Multiplayer
+          path: releases/BLACKLINE-Multiplayer.zip

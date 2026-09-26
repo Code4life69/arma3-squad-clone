@@ -1,3 +1,5 @@
+> Historical Squad/VR foundation document. The current BO2-inspired arena is described in README.md and BLACKLINE_ARCHITECTURE.md.
+
 # Mission Plan
 
 The project is intentionally AI-first: assume roughly 95%+ of battlefield participants are AI and one or a few humans may occupy leadership or combat roles. PvP balance is not a current design target.

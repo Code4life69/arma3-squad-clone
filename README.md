@@ -1,48 +1,55 @@
-# Arma 3 Squad Clone
+# BLACKLINE — Black Ops II-inspired multiplayer for Arma 3
 
-AI-first, Squad-inspired combined-arms mission framework for Arma 3.
+A vanilla Arma 3 infantry arena in **Kavala, Altis**, developed from the `m001-runtime-foundation` branch. The original `SQC_SquadClone.VR` runtime remains available as a regression fixture.
 
-## Project goal
+**Status: implemented prototype; engine playtest pending.** Source structure, SQF parsing, and pure rule regression tests run automatically. Arma graphics, terrain clearance, AI navigation, and multiplayer synchronization need the hosted/dedicated playtest in [docs/PLAYTEST.md](docs/PLAYTEST.md). This is not a completed one-to-one Black Ops II reproduction.
 
-Build a modern tactical game mode inside Arma 3 where one human player can fight in a battlefield populated primarily by AI. The project is not being designed around PvP at this stage. The human should be able to join or lead a squad while the rest of the force operates through AI squads, fireteams, vehicles, logistics, objectives, spawning and command systems.
+## Included
 
-The UI will be original, but functionally inspired by Squad: a modern deployment/map screen, squad and role management, spawn selection, objective/ticket information, command tools and clear status feedback.
+- 12 multiplayer slots, six on each side; 1v1 / 3v3 / 6v6 population targets with server-owned bot fill.
+- Team Deathmatch, Domination, Hardpoint, and Kill Confirmed; warmup, time/score limits, match report, automatic next match.
+- Three-second engine respawn followed by a server safety queue. Spawn candidates cover streets and building interiors, retain floor height, reject nearby enemies/occupied spots/recent reservations, and check enemy sightlines.
+- BO2-inspired charcoal/orange class screen, minimap, score/timer, kill feed, ammo display, objective markers, scoreboard, and scorestreak panel.
+- Five vanilla weapon families, a ten-point class budget, optional optic/pistol/grenades, four adapted perks, health regeneration, no fatigue, and first-person presentation.
+- UAV, counter-UAV, and a delayed three-impact lightning strike adaptation. Earned rewards survive death; life score resets.
+- Server-owned scores, captures, bot population, deployment, and streak authorization; restricted named remote calls and caller ownership checks.
 
-## Development rule
+## Play
 
-One milestone at a time. A milestone is not considered complete until it passes all three gates:
+1. Download `releases/BLACKLINE-Multiplayer.zip` from this branch, or copy `mission/BO2_Multiplayer.Altis` from the source.
+2. Extract the **whole `BO2_Multiplayer.Altis` folder** into your Arma profile's `mpmissions` directory. For the default Windows profile: `Documents\Arma 3\mpmissions`. Named profiles use `Documents\Arma 3 - Other Profiles\<profile>\mpmissions`.
+3. Open the mission in Eden on Altis and use **Play → Play in Multiplayer**, or select it when hosting multiplayer. Join a BLACK OPS or MERCENARIES slot.
+4. Set the mode, population, match time, and AI difficulty in lobby Parameters. One human is enough; bots fill the rest.
+5. For a dedicated server, use Eden **Scenario → Export → Export to Multiplayer**, then copy the exported `.pbo` to the server's `MPMissions` folder.
 
-1. Architecture/locality review against Arma 3 multiplayer behavior.
-2. Static structure and invariant validation.
-3. SQF syntax validation plus an in-game checklist when engine behavior is involved.
+Arma 3 **2.14+**, vanilla assets; no Workshop dependencies. The initial test arena is a 225 m radius around `[3660,13110]`. Objective coordinates are authored starting points, still awaiting terrain inspection.
 
-No later gameplay system should be layered on top of a failed foundation.
+| Control | Action |
+| --- | --- |
+| F4 | Class menu; saved changes apply at the next spawn |
+| Hold Tab | Scoreboard |
+| 5 | Activate earned UAV |
+| 6 | Activate earned counter-UAV |
+| 7 | Activate earned lightning strike at your crosshair's terrain point |
 
-## Current milestone
+Default Arma movement, aim, reload, and grenade controls remain. A 1.5-second spawn shield suppresses your outgoing projectiles too. Leaving the combat area gives eight seconds to return, then queues redeployment.
 
-**M001 — Runtime Foundation**
+## Scope and differences
 
-The repository currently contains a minimal VR development mission with:
+This build uses original UI code and Arma weapons, animations, buildings, and sounds. Spawn weighting is an original safety heuristic, **not Treyarch's proprietary spawn algorithm**. The ten-point class builder and perks are simplified adaptations. Domination uses one continuous round; Hardpoint uses three authored positions; the strike uses explosive impacts instead of an aircraft.
 
-- CfgFunctions-based function registration.
-- Separate server, player-client and headless-client startup paths.
-- Execution-role detection.
-- Standardized diagnostic logging.
-- Lightweight assertions.
-- Automated repository structure checks.
-- Automated SQF syntax checking in GitHub Actions.
+Not yet implemented: killcam/final-kill replay, hitmarkers, exact BO2 weapon balance, the full weapon/perk/streak catalog, prestige/unlocks, Search & Destroy, map voting, or automatic support for every town. Building reachability, UI scaling, network races, and pacing must be verified in-game before calling this release ready.
 
-No combat, spawning, objectives, tickets, FOBs, AI director or UI gameplay logic is intentionally included in M001.
+## Development checks
 
-## Development mission
+Linux x64 / Python 3.11+:
 
-Copy `mission/SQC_SquadClone.VR` into your Arma 3 `mpmissions` folder and open it in Eden or host it as a multiplayer mission.
+```sh
+python tools/fetch_sqfvm.py
+python tests/validate_arena.py
+python tests/lint_sqf.py
+python -m unittest discover -s tests -p 'test_*.py' -v
+python tools/package_mission.py
+```
 
-Expected startup RPT messages begin with `[SQC]` and identify the machine role as one of:
-
-- `DEDICATED_SERVER`
-- `HOST_SERVER`
-- `PLAYER_CLIENT`
-- `HEADLESS_CLIENT`
-
-See `docs/MISSION_PLAN.md` for the full staged plan and `docs/ARCHITECTURE.md` for the technical rules.
+SQF-VM is pinned and checksum-verified. The rule tests execute the actual class-budget and Domination functions, not Python copies. It is not the Arma engine. See [architecture](docs/BLACKLINE_ARCHITECTURE.md), [research](docs/BLACKLINE_RESEARCH.md), and [playtest checklist](docs/PLAYTEST.md).

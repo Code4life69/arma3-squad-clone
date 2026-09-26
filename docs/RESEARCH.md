@@ -1,3 +1,5 @@
+> Historical Squad/VR foundation document. The current BO2-inspired arena is described in README.md and BLACKLINE_ARCHITECTURE.md.
+
 # Research Notes
 
 Research date: 2026-09-26

@@ -1,0 +1,85 @@
+author = "Code4life69";
+onLoadName = "BLACKLINE // MULTIPLAYER";
+onLoadMission = "Black Ops II-inspired infantry arena | Kavala, Altis";
+briefingName = "BLACKLINE | Kavala Arena";
+requiredVersion = 2.14;
+respawn = 3;
+respawnDelay = 3;
+respawnOnStart = -1;
+respawnDialog = 0;
+disabledAI = 1;
+joinUnassigned = 0;
+reviveMode = 0;
+enableDebugConsole = 0;
+corpseManagerMode = 1;
+corpseLimit = 16;
+corpseRemovalMinTime = 10;
+corpseRemovalMaxTime = 30;
+wreckManagerMode = 1;
+wreckLimit = 4;
+class Header { gameType = TDM; minPlayers = 1; maxPlayers = 12; };
+class Params {
+ class Mode { title="Game mode"; values[]={0,1,2,3}; texts[]={"TEAM DEATHMATCH","DOMINATION","HARDPOINT","KILL CONFIRMED"}; default=0; };
+ class TeamSize { title="Combatants per team (bots fill empty places)"; values[]={1,3,6}; texts[]={"1 v 1","3 v 3","6 v 6"}; default=6; };
+ class Minutes { title="Match time"; values[]={5,10,15}; texts[]={"5 minutes","10 minutes","15 minutes"}; default=10; };
+ class Difficulty { title="Bot accuracy"; values[]={15,25,40}; texts[]={"Recruit","Regular","Veteran"}; default=25; };
+};
+class CfgFunctions {
+ class BL {
+  tag="BL";
+  class Core { file="Functions\Core"; class config { preInit=1; }; class captureStep {}; };
+  class Server { file="Functions\Server";
+   class serverInit {}; class serverLoop {}; class request {}; class publish {}; class resetMatch {};
+   class killed {}; class award {}; class objectives {}; class bots {}; class deploy {}; class streak {};
+  };
+  class Spawn { file="Functions\Spawn"; class buildSpawns {}; class selectSpawn {}; };
+  class Client { file="Functions\Client";
+   class clientInit {}; class prepare {}; class receive {}; class loadout {}; class hud {}; class menu {};
+   class drawMap {}; class event {}; class classCost {}; class saveClass {}; class scoreboard {};
+  };
+ };
+};
+class CfgRemoteExec {
+ class Functions {
+  mode=1; jip=0;
+  class BL_fnc_request { allowedTargets=2; };
+  // Targets 0 intentionally permits a hosted server's local player. Sender is checked inside.
+  class BL_fnc_receive { allowedTargets=0; };
+  class BL_fnc_event { allowedTargets=0; };
+ };
+ class Commands { mode=0; jip=0; };
+};
+import RscText;
+import RscStructuredText;
+import RscButton;
+import RscCombo;
+import RscListbox;
+import RscMapControl;
+class BL_Text: RscText { font="RobotoCondensed"; sizeEx=0.034; colorText[]={0.92,0.93,0.94,1}; colorBackground[]={0,0,0,0}; };
+class BL_Button: RscButton {
+ font="RobotoCondensedBold"; sizeEx=0.033;
+ colorBackground[]={0.12,0.13,0.14,1}; colorBackgroundActive[]={0.93,0.36,0.06,1};
+ colorFocused[]={0.8,0.28,0.04,1}; colorText[]={1,1,1,1};
+};
+class BL_Menu {
+ idd=8800; movingEnable=0; enableSimulation=1;
+ onUnload="uiNamespace setVariable ['BL_menu',displayNull]";
+ class controls {};
+};
+class RscTitles {
+ class BL_HUD {
+  idd=8801; duration=1e10; fadeIn=0; fadeOut=0; movingEnable=0;
+  onLoad="uiNamespace setVariable ['BL_hud',_this select 0]";
+  onUnload="uiNamespace setVariable ['BL_hud',displayNull]";
+  class controls {
+   class Radar: RscMapControl { idc=100; x="safeZoneX+0.025*safeZoneW"; y="safeZoneY+0.045*safeZoneH"; w="0.19*safeZoneW"; h="0.23*safeZoneH"; showCountourInterval=0; showLegend=0; scaleMin=0.001; scaleMax=0.1; colorBackground[]={0.035,0.045,0.045,0.92}; };
+   class Score: RscStructuredText { idc=101; x="safeZoneX+0.025*safeZoneW"; y="safeZoneY+0.29*safeZoneH"; w="0.23*safeZoneW"; h="0.13*safeZoneH"; colorBackground[]={0.02,0.025,0.03,0.8}; };
+   class Ammo: RscStructuredText { idc=102; x="safeZoneX+0.76*safeZoneW"; y="safeZoneY+0.82*safeZoneH"; w="0.215*safeZoneW"; h="0.13*safeZoneH"; colorBackground[]={0.02,0.025,0.03,0.8}; };
+   class Feed: RscStructuredText { idc=103; x="safeZoneX+0.025*safeZoneW"; y="safeZoneY+0.68*safeZoneH"; w="0.32*safeZoneW"; h="0.22*safeZoneH"; };
+   class Notice: RscStructuredText { idc=104; x="safeZoneX+0.3*safeZoneW"; y="safeZoneY+0.3*safeZoneH"; w="0.4*safeZoneW"; h="0.16*safeZoneH"; };
+   class Streaks: RscStructuredText { idc=105; x="safeZoneX+0.78*safeZoneW"; y="safeZoneY+0.57*safeZoneH"; w="0.195*safeZoneW"; h="0.21*safeZoneH"; colorBackground[]={0.02,0.025,0.03,0.7}; };
+   class Objective: RscStructuredText { idc=106; x="safeZoneX+0.32*safeZoneW"; y="safeZoneY+0.045*safeZoneH"; w="0.36*safeZoneW"; h="0.1*safeZoneH"; };
+   class Board: RscStructuredText { idc=107; x="safeZoneX+0.22*safeZoneW"; y="safeZoneY+0.19*safeZoneH"; w="0.56*safeZoneW"; h="0.65*safeZoneH"; colorBackground[]={0.015,0.02,0.025,0.96}; };
+  };
+ };
+};

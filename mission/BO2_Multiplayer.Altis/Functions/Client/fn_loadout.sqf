@@ -1,0 +1,24 @@
+params ["_unit","_class"];
+if (!local _unit) exitWith {};
+private _primary = BL_primary select (_class select 0);
+removeAllWeapons _unit; removeAllItems _unit; removeAllAssignedItems _unit;
+removeUniform _unit; removeVest _unit; removeBackpack _unit; removeHeadgear _unit;
+_unit forceAddUniform (if (side group _unit isEqualTo west) then {"U_B_CombatUniform_mcam"} else {"U_O_CombatUniform_ocamo"});
+_unit addVest "V_TacVest_blk";
+_unit addHeadgear (if (side group _unit isEqualTo west) then {"H_HelmetB_light"} else {"H_HelmetO_ocamo"});
+_unit addBackpack "B_AssaultPack_blk";
+for "_i" from 1 to 5 do { _unit addMagazine (_primary select 2); };
+_unit addWeapon (_primary select 1);
+if ((_class select 1) isEqualTo 1) then { _unit addPrimaryWeaponItem (_primary select 3); };
+if ((_class select 2) isEqualTo 1) then {
+ _unit addMagazine "16Rnd_9x21_Mag"; _unit addMagazine "16Rnd_9x21_Mag"; _unit addWeapon "hgun_P07_F";
+};
+if ((_class select 3) isEqualTo 1) then { _unit addMagazine "HandGrenade"; };
+if ((_class select 4) isEqualTo 1) then { _unit addMagazine "SmokeShell"; };
+{ _unit linkItem _x; } forEach ["ItemMap","ItemCompass","ItemWatch","ItemRadio"];
+_unit selectWeapon (_primary select 1);
+_unit enableFatigue false; _unit enableStamina false;
+_unit setCustomAimCoef (if ((_class select 6) isEqualTo 1) then {0.35} else {0.65});
+_unit setAnimSpeedCoef (if ((_class select 5) isEqualTo 1) then {1.08} else {1});
+_unit setSpeaker "NoVoice";
+_unit setDamage 0;
