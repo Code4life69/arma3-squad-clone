@@ -20,7 +20,7 @@ for "_xoff" from -200 to 200 step 25 do {
   private _p = BL_center vectorAdd [_xoff,_yoff,0];
   if (_p distance2D BL_center < BL_radius - 15 && {!surfaceIsWater _p} && {(surfaceNormal _p) select 2 > 0.9}) then {
    private _empty = _p findEmptyPosition [0,8,"B_Soldier_F"];
-   if (count _empty > 0 && {_empty distance2D BL_center < BL_radius - 15}) then {
+   if (count _empty > 0 && {!surfaceIsWater _empty} && {(surfaceNormal _empty) select 2 > 0.9} && {_empty distance2D BL_center < BL_radius - 15}) then {
     _empty set [2,0]; BL_spawns pushBack [_empty,false,objNull];
    };
   };

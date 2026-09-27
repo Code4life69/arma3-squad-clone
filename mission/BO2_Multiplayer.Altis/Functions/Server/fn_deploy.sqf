@@ -36,6 +36,9 @@ if (count _delivery isEqualTo 0) exitWith {
 };
 _delivery params ["_ticket","_spawn","_class","_round"];
 if (isPlayer _unit) exitWith {
+ // The server owns the destination; set it before delivery so a disabled unit's
+ // position replication cannot leave a valid acknowledgement waiting forever.
+ _unit setPosATL (_spawn select 0);
  if (serverTime - (_unit getVariable ["BL_deliverySentAt",-10]) >= 2) then {
   [_unit,_spawn,_class,_round,_ticket,netId _unit] remoteExecCall ["BL_fnc_receive",owner _unit];
   _unit setVariable ["BL_deliverySentAt",serverTime];
@@ -46,7 +49,7 @@ if (isPlayer _unit) exitWith {
 _unit setPosATL (_spawn select 0); _unit setDir (_spawn select 1);
 [_unit,_class] call BL_fnc_loadout;
 _unit setVariable ["BL_active",true,true];
-_unit setVariable ["BL_protectedUntil",serverTime+1.5,true];
+_unit setVariable ["BL_protectedUntil",serverTime+(_unit getVariable ["BL_spawnShield",1.5]),true];
 _unit setVariable ["BL_delivery",[]];
 _unit hideObjectGlobal false;
 _unit enableSimulationGlobal (BL_phase isEqualTo "ACTIVE");

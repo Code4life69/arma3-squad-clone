@@ -19,17 +19,17 @@ corpseRemovalMinTime = 10;
 corpseRemovalMaxTime = 30;
 wreckManagerMode = 1;
 wreckLimit = 4;
-class Header { gameType = TDM; minPlayers = 1; maxPlayers = 12; };
+class Header { gameType = TDM; minPlayers = 1; maxPlayers = 32; };
 class Params {
  class Mode { title="Game mode"; values[]={0,1,2,3}; texts[]={"TEAM DEATHMATCH","DOMINATION","HARDPOINT","KILL CONFIRMED"}; default=0; };
- class TeamSize { title="Combatants per team (bots fill empty places)"; values[]={1,3,6}; texts[]={"1 v 1","3 v 3","6 v 6"}; default=6; };
+ class TeamSize { title="Combatants per team (bots fill empty places)"; values[]={0,1,3,6,8,12,16}; texts[]={"AUTO - scale with arena area","1 v 1","3 v 3","6 v 6","8 v 8","12 v 12","16 v 16"}; default=0; };
  class Minutes { title="Match time"; values[]={5,10,15}; texts[]={"5 minutes","10 minutes","15 minutes"}; default=10; };
  class Difficulty { title="Bot accuracy"; values[]={15,25,40}; texts[]={"Recruit","Regular","Veteran"}; default=25; };
 };
 class CfgFunctions {
  class BL {
   tag="BL";
-  class Core { file="Functions\Core"; class config { preInit=1; }; class captureStep {}; class deploymentAckValid {}; class deliveryAction {}; };
+  class Core { file="Functions\Core"; class config { preInit=1; }; class captureStep {}; class population {}; class deploymentAckValid {}; class deliveryAction {}; };
   class Server { file="Functions\Server";
    class serverInit {}; class serverLoop {}; class request {}; class publish {}; class resetMatch {};
    class killed {}; class award {}; class objectives {}; class bots {}; class deploy {}; class streak {};

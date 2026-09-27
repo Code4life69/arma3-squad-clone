@@ -69,3 +69,11 @@ class RespawnProtocol(unittest.TestCase):
     def test_next_round_new_ticket_applies(self): self.assertEqual(self.delivery([7,2,8,3]),2)
 
 if __name__=='__main__': unittest.main()
+
+class Population(unittest.TestCase):
+    def test_auto_density_and_limits(self):
+        for radius, expected in [(75,6),(225,12),(300,16),(1000,16)]:
+            self.assertEqual(call('Functions/Core/fn_population.sqf',[radius,0]),expected)
+    def test_manual_override(self):
+        for requested, expected in [(1,1),(8,8),(12,12),(99,16)]:
+            self.assertEqual(call('Functions/Core/fn_population.sqf',[225,requested]),expected)

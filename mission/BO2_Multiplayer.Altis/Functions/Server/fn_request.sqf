@@ -41,7 +41,7 @@ if (_action isEqualTo "deployed") exitWith {
  if (!([_ticket,_round,_data select 0,_data select 1,BL_round] call BL_fnc_deploymentAckValid)) exitWith {};
  // Position replication can lag the ACK; the same ticket will be resent safely.
  if (_unit distance (_spawn select 0) > 8) exitWith {};
- _unit setVariable ["BL_protectedUntil",serverTime+1.5,true];
+ _unit setVariable ["BL_protectedUntil",serverTime+(_unit getVariable ["BL_spawnShield",1.5]),true];
  _unit setVariable ["BL_confirmedDelivery",[_ticket,_round],true];
  _unit setVariable ["BL_active",true,true];
  _unit setVariable ["BL_delivery",[]];

@@ -19,7 +19,7 @@ class MissionConfig(unittest.TestCase):
                 elif kind=='Marker':markers[entity.values['name']]=entity
         walk(entities)
         self.assertEqual(len(ids),len(set(ids)))
-        self.assertEqual(len(players),12)
+        self.assertEqual(len(players),32)
         self.assertEqual(sum(p.classes['Attributes'].values.get('isPlayer',0) for p in players),1)
         self.assertTrue(all(p.classes['Attributes'].values['isPlayable']==1 for p in players))
         self.assertEqual(set(markers),{'respawn_west','respawn_east'})

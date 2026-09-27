@@ -4,6 +4,10 @@ A vanilla Arma 3 infantry arena in **Kavala, Altis**, developed from the `m001-r
 
 **Status: implemented prototype; engine playtest pending.** Source structure, SQF parsing, and pure rule regression tests run automatically. Arma graphics, terrain clearance, AI navigation, and multiplayer synchronization need the hosted/dedicated playtest in [docs/PLAYTEST.md](docs/PLAYTEST.md). This is not a completed one-to-one Black Ops II reproduction.
 
+## Spawn queue repair
+
+Spawn selection now relaxes enemy visibility after eight seconds while retaining land, occupancy, recent reservation, and a 15 m enemy exclusion. Relaxed spawns receive three seconds of protection. Final outdoor positions are checked for water after the empty-position search, and engine respawn markers are moved to checked ground candidates at startup. Deployment sets the server's destination before client acknowledgement to avoid waiting on a disabled unit's position replication. These changes address code-level failure paths; hosted Arma validation remains required.
+
 ## Respawn repair build
 
 This revision passes Arma's new respawn unit into initialization, tracks each life by network ID, retries server-issued deployment tickets without repeated refills, and waits for acknowledgement before activating the player. Damage protection no longer depends on the HUD rendering. The mission now includes permanent respawn markers and startup positions near Kavala instead of offshore map-corner coordinates.
@@ -12,7 +16,7 @@ The reported corruption could not be confirmed without the failing file or Arma 
 
 ## Included
 
-- 12 multiplayer slots, six on each side; 1v1 / 3v3 / 6v6 population targets with server-owned bot fill.
+- 32 multiplayer slots, sixteen on each side; automatic arena-area population (12v12 here, capped at 16v16) and manual 1v1 through 16v16 targets with server-owned bot fill.
 - Team Deathmatch, Domination, Hardpoint, and Kill Confirmed; warmup, time/score limits, match report, automatic next match.
 - Three-second engine respawn followed by a server safety queue. Spawn candidates cover streets and building interiors, retain floor height, reject nearby enemies/occupied spots/recent reservations, and check enemy sightlines.
 - BO2-inspired charcoal/orange class screen, minimap, score/timer, kill feed, ammo display, objective markers, scoreboard, and scorestreak panel.

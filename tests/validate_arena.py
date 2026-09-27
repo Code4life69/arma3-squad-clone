@@ -27,7 +27,7 @@ for name in ['receive','event']:
 for name in ['serverInit','serverLoop','resetMatch','publish','bots','deploy','killed','objectives','streak','buildSpawns','selectSpawn']:
     assert '!isServer' in functions[name].read_text(),name
 spawn=functions['selectSpawn'].read_text()
-for required in ['_nearEnemy > 40','checkVisibility','_occupied','_reserved','BL_deathHeat','BL_spawnScan','exitWith {[]}']:
+for required in ['_nearEnemy > _minimumEnemyDistance','checkVisibility','_occupied','_reserved','BL_deathHeat','BL_spawnScan','exitWith {[]}']:
     assert required in spawn,required
 assert 'setPosATL' in functions['receive'].read_text()
 assert 'setPosATL' in functions['deploy'].read_text()
@@ -35,8 +35,8 @@ assert 'getPosATL' in functions['killed'].read_text()
 for name in ['RscText','RscStructuredText','RscButton','RscMapControl']:
     assert f'import {name};' in cfg
 sqm=(M/'mission.sqm').read_text()
-assert sqm.count('isPlayable=1;')==12
+assert sqm.count('isPlayable=1;')==32
 assert sqm.count('isPlayer=1;')==1
 assert 'A3_Map_Altis' in sqm
 assert len(re.findall(r'\bid=\d+;',sqm))==len(set(re.findall(r'\bid=(\d+);',sqm)))
-print(f'PASS: arena registration, 12 slots, network boundaries, and spawn contracts ({len(functions)} functions)')
+print(f'PASS: arena registration, 32 slots, network boundaries, and spawn contracts ({len(functions)} functions)')
