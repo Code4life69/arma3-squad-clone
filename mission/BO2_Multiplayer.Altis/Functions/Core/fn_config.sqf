@@ -18,3 +18,5 @@ BL_feed = [];
 BL_notice = ["",0];
 BL_boardHeld = false;
 BL_pending = true;
+BL_prepareLife = "";
+BL_appliedDelivery = [-1,-1];

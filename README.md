@@ -4,6 +4,12 @@ A vanilla Arma 3 infantry arena in **Kavala, Altis**, developed from the `m001-r
 
 **Status: implemented prototype; engine playtest pending.** Source structure, SQF parsing, and pure rule regression tests run automatically. Arma graphics, terrain clearance, AI navigation, and multiplayer synchronization need the hosted/dedicated playtest in [docs/PLAYTEST.md](docs/PLAYTEST.md). This is not a completed one-to-one Black Ops II reproduction.
 
+## Respawn repair build
+
+This revision passes Arma's new respawn unit into initialization, tracks each life by network ID, retries server-issued deployment tickets without repeated refills, and waits for acknowledgement before activating the player. Damage protection no longer depends on the HUD rendering. The mission now includes permanent respawn markers and startup positions near Kavala instead of offshore map-corner coordinates.
+
+The reported corruption could not be confirmed without the failing file or Arma error/RPT. The rebuilt text configs now receive strict syntax/entity checks, and the downloadable PBO/ZIP include integrity checksums. Live Arma testing is still pending.
+
 ## Included
 
 - 12 multiplayer slots, six on each side; 1v1 / 3v3 / 6v6 population targets with server-owned bot fill.
@@ -16,11 +22,14 @@ A vanilla Arma 3 infantry arena in **Kavala, Altis**, developed from the `m001-r
 
 ## Play
 
-1. Download `releases/BLACKLINE-Multiplayer.zip` from this branch, or copy `mission/BO2_Multiplayer.Altis` from the source.
-2. Extract the **whole `BO2_Multiplayer.Altis` folder** into your Arma profile's `mpmissions` directory. For the default Windows profile: `Documents\Arma 3\mpmissions`. Named profiles use `Documents\Arma 3 - Other Profiles\<profile>\mpmissions`.
-3. Open the mission in Eden on Altis and use **Play → Play in Multiplayer**, or select it when hosting multiplayer. Join a BLACK OPS or MERCENARIES slot.
-4. Set the mode, population, match time, and AI difficulty in lobby Parameters. One human is enough; bots fill the rest.
-5. For a dedicated server, use Eden **Scenario → Export → Export to Multiplayer**, then copy the exported `.pbo` to the server's `MPMissions` folder.
+1. Download `releases/BLACKLINE-Multiplayer.zip` and extract it.
+2. Replace the old installed copy with **`BO2_Multiplayer.Altis.pbo`** in your game installation's `MPMissions` folder, commonly `Steam\steamapps\common\Arma 3\MPMissions`. The same PBO works for a dedicated server's `MPMissions` folder.
+3. In Arma choose **Multiplayer → Server Browser → Host Server → LAN**, select **Altis → BLACKLINE | Kavala Arena**, and join a BLACK OPS or MERCENARIES slot. You can host alone with bots.
+4. Set the mode, population, time, and difficulty under lobby Parameters.
+
+**Do not test respawn using single-player preview.** For Eden editing, copy the unpacked `BO2_Multiplayer.Altis` folder into your profile's `missions` folder and use **Play → Play in Multiplayer**. Install either the packed mission or the editable folder for a given test, avoiding duplicate old versions.
+
+`releases/SHA256SUMS.txt` covers both downloads. The ZIP also contains a per-file checksum manifest. If startup or respawn still fails, send the exact error and the latest `Arma3*.rpt` from `%LOCALAPPDATA%\Arma 3`, especially lines containing `[BLACKLINE]` or `Error in expression`.
 
 Arma 3 **2.14+**, vanilla assets; no Workshop dependencies. The initial test arena is a 225 m radius around `[3660,13110]`. Objective coordinates are authored starting points, still awaiting terrain inspection.
 
@@ -50,6 +59,7 @@ python tests/validate_arena.py
 python tests/lint_sqf.py
 python -m unittest discover -s tests -p 'test_*.py' -v
 python tools/package_mission.py
+python tests/verify_package.py
 ```
 
 SQF-VM is pinned and checksum-verified. The rule tests execute the actual class-budget and Domination functions, not Python copies. It is not the Arma engine. See [architecture](docs/BLACKLINE_ARCHITECTURE.md), [research](docs/BLACKLINE_RESEARCH.md), and [playtest checklist](docs/PLAYTEST.md).

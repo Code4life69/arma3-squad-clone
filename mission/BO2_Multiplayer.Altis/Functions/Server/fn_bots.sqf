@@ -18,7 +18,7 @@ if (!isServer) exitWith {};
   private _old = _x select 1;
   if (!alive _old && {serverTime - (_old getVariable ["BL_deadAt",0]) >= 3}) then {
    private _g = group _old;
-   private _u = _g createUnit [["B_Soldier_F","O_Soldier_F"] select _team,[1000,1000,0],[],0,"NONE"];
+   private _u = _g createUnit [["B_Soldier_F","O_Soldier_F"] select _team,BL_center,[],0,"NONE"];
    _x set [1,_u];
    _u setVariable ["BL_record",_x select 0];
    _u setVariable ["BL_bot",true,true];
@@ -32,7 +32,7 @@ if (!isServer) exitWith {};
   BL_botSerial = BL_botSerial + 1;
   private _id = format ["BOT_%1",BL_botSerial];
   private _g = createGroup [_side,true];
-  private _u = _g createUnit [["B_Soldier_F","O_Soldier_F"] select _team,[1000,1000,0],[],0,"NONE"];
+  private _u = _g createUnit [["B_Soldier_F","O_Soldier_F"] select _team,BL_center,[],0,"NONE"];
   private _class = +BL_defaultClass; _class set [0,floor random 4];
   BL_records pushBack [_id,_u,_team,format ["BOT %1",BL_botSerial],0,0,0,0,[],[],_class,0];
   _u setVariable ["BL_record",_id]; _u setVariable ["BL_bot",true,true];

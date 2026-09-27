@@ -27,3 +27,10 @@ No primary source exposing Treyarch's exact BO2 spawn algorithm was established.
 
 - https://github.com/SQFvm/runtime/releases/tag/v2026.04.03-ed9f5f5 — pinned SQF parser/runtime for syntax and pure rules, not terrain, UI, physics, or multiplayer emulation.
 - SQF-VM's config parser is not used as an Arma mission-config validator; the root mission format/imported engine UI classes require the real engine. Static delimiter/registration checks cover these files offline.
+
+## Respawn repair references (2026-09-27 UTC)
+
+- https://community.bohemia.net/wiki/Event_Scripts — onPlayerRespawn receives new unit, old unit, respawn type, and delay. Initialization now consumes the new unit explicitly.
+- https://community.bohemia.net/wiki/Mission.sqm — text entity/group/marker structure; new structural parser checks counts, identities, slots, markers, and syntax.
+- https://community.bohemia.net/wiki/PBO — PBO entry table, properties, uncompressed data, and trailing checksum. The repair package includes a packed mission plus SHA-256 manifests.
+- SQF-VM's Linux virtual path mapping cannot resolve nested backslash PBO names correctly. Package verification therefore reads all entries directly and additionally checks the two root config files through SQF-VM's independent reader. This does not claim Arma config/asset validation.

@@ -1,22 +1,253 @@
 version=53;
-class EditorData { moveGridStep=1; angleGridStep=0.2617994; scaleGridStep=1; autoGroupingDist=10; toggles=1; class ItemIDProvider {nextID=20;}; };
 binarizationWanted=0;
-addons[]={"A3_Characters_F_BLUFOR","A3_Characters_F_OPFOR","A3_Map_Altis"};
 randomSeed=260926;
-class ScenarioData {author="Code4life69";};
-class Mission {
- class Intel { year=2035; month=6; day=28; hour=14; minute=0; startWeather=0.15; forecastWeather=0.15; startWind=0.1; forecastWind=0.1; timeOfChanges=1800; };
- class Entities {items=2;class Item0 { dataType="Group"; side="West"; class Entities { items=6; class Item0 { dataType="Object"; class PositionInfo { position[]={1000,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 1"; isPlayable=1; init="this allowDamage false;"; isPlayer=1; }; id=1; type="B_Soldier_F"; };class Item1 { dataType="Object"; class PositionInfo { position[]={1002,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 2"; isPlayable=1; init="this allowDamage false;";  }; id=2; type="B_Soldier_F"; };class Item2 { dataType="Object"; class PositionInfo { position[]={1004,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 3"; isPlayable=1; init="this allowDamage false;";  }; id=3; type="B_Soldier_F"; };class Item3 { dataType="Object"; class PositionInfo { position[]={1006,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 4"; isPlayable=1; init="this allowDamage false;";  }; id=4; type="B_Soldier_F"; };class Item4 { dataType="Object"; class PositionInfo { position[]={1008,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 5"; isPlayable=1; init="this allowDamage false;";  }; id=5; type="B_Soldier_F"; };class Item5 { dataType="Object"; class PositionInfo { position[]={1010,0,1000}; };
- side="West"; flags=7; class Attributes { description="BLACK OPS 6"; isPlayable=1; init="this allowDamage false;";  }; id=6; type="B_Soldier_F"; }; }; class Attributes {}; id=0; };class Item1 { dataType="Group"; side="East"; class Entities { items=6; class Item0 { dataType="Object"; class PositionInfo { position[]={1040,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 1"; isPlayable=1; init="this allowDamage false;";  }; id=8; type="O_Soldier_F"; };class Item1 { dataType="Object"; class PositionInfo { position[]={1042,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 2"; isPlayable=1; init="this allowDamage false;";  }; id=9; type="O_Soldier_F"; };class Item2 { dataType="Object"; class PositionInfo { position[]={1044,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 3"; isPlayable=1; init="this allowDamage false;";  }; id=10; type="O_Soldier_F"; };class Item3 { dataType="Object"; class PositionInfo { position[]={1046,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 4"; isPlayable=1; init="this allowDamage false;";  }; id=11; type="O_Soldier_F"; };class Item4 { dataType="Object"; class PositionInfo { position[]={1048,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 5"; isPlayable=1; init="this allowDamage false;";  }; id=12; type="O_Soldier_F"; };class Item5 { dataType="Object"; class PositionInfo { position[]={1050,0,1000}; };
- side="East"; flags=7; class Attributes { description="MERCENARIES 6"; isPlayable=1; init="this allowDamage false;";  }; id=13; type="O_Soldier_F"; }; }; class Attributes {}; id=7; };};
+addons[]={"A3_Characters_F_BLUFOR","A3_Characters_F_OPFOR","A3_Map_Altis"};
+class EditorData
+{
+    moveGridStep=1;
+    angleGridStep=0.2617994;
+    scaleGridStep=1;
+    autoGroupingDist=10;
+    toggles=1;
+    class ItemIDProvider { nextID=16; };
+    class Camera
+    {
+        pos[]={3660,180,12920};
+        dir[]={0,-0.6,0.8};
+        up[]={0,0.8,0.6};
+        aside[]={1,0,0};
+    };
+};
+class ScenarioData { author="Code4life69"; };
+class Mission
+{
+    class Intel
+    {
+        year=2035; month=6; day=28; hour=14; minute=0;
+        startWeather=0.15; forecastWeather=0.15;
+        startWind=0.1; forecastWind=0.1; timeOfChanges=1800;
+    };
+    class Entities
+    {
+        items=4;
+        class Item0
+        {
+            dataType="Group";
+            side="West";
+            id=0;
+            class Attributes {};
+            class Entities
+            {
+                items=6;
+                class Item0
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3520,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=1;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 1";
+                        isPlayable=1;
+                        isPlayer=1;
+                        init="this allowDamage false; this setPosATL [3520,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item1
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3522,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=2;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 2";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3522,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item2
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3524,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=3;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 3";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3524,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item3
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3526,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=4;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 4";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3526,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item4
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3528,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=5;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 5";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3528,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item5
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3530,0,13110}; angles[]={0,0,0}; };
+                    side="West";
+                    flags=7;
+                    id=6;
+                    type="B_Soldier_F";
+                    class Attributes
+                    {
+                        description="BLACK OPS 6";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3530,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+            };
+        };
+        class Item1
+        {
+            dataType="Group";
+            side="East";
+            id=7;
+            class Attributes {};
+            class Entities
+            {
+                items=6;
+                class Item0
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3800,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=8;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 1";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3800,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item1
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3802,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=9;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 2";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3802,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item2
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3804,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=10;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 3";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3804,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item3
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3806,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=11;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 4";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3806,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item4
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3808,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=12;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 5";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3808,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+                class Item5
+                {
+                    dataType="Object";
+                    class PositionInfo { position[]={3810,0,13110}; angles[]={0,0,0}; };
+                    side="East";
+                    flags=7;
+                    id=13;
+                    type="O_Soldier_F";
+                    class Attributes
+                    {
+                        description="MERCENARIES 6";
+                        isPlayable=1;
+                        init="this allowDamage false; this setPosATL [3810,13110,0]; if (isServer) then {this hideObjectGlobal true; this enableSimulationGlobal false;};";
+                    };
+                };
+            };
+        };
+        class Item2
+        {
+            dataType="Marker";
+            position[]={3520,0,13110};
+            name="respawn_west";
+            type="Empty";
+            id=14;
+        };
+        class Item3
+        {
+            dataType="Marker";
+            position[]={3800,0,13110};
+            name="respawn_east";
+            type="Empty";
+            id=15;
+        };
+    };
 };

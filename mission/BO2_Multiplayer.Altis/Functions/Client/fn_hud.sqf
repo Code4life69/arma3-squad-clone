@@ -12,6 +12,7 @@ while {!isNull _hud} do {
  private _s = missionNamespace getVariable ["BL_state",[]];
  if (count _s > 0) then {
   private _phase = _s select 0;
+
   private _team = [west,east] find (side group player);
   if (_team < 0) then { _team = 0; };
   private _seconds = 0 max ceil ((_s select 4) - serverTime);
@@ -42,7 +43,7 @@ while {!isNull _hud} do {
   (_hud displayCtrl 103) ctrlSetStructuredText parseText _feed;
   private _notice = if ((BL_notice select 1) > diag_tickTime) then {BL_notice select 0} else {""};
   if ((BL_pending || {!(player getVariable ["BL_active",false])}) && {alive player}) then { _notice = "FINDING A SAFE SPAWN..."; };
-  if (_phase isEqualTo "WARMUP") then { _notice = format ["MATCH BEGINS IN %1",_seconds]; };
+  if (_phase isEqualTo "WARMUP" && {!BL_pending}) then { _notice = format ["MATCH BEGINS IN %1",_seconds]; };
   if (_phase isEqualTo "INTERMISSION") then {
    _notice = format ["%1 | NEXT MATCH %2",if (_mine isEqualTo _theirs) then {"DRAW"} else {if (_mine > _theirs) then {"VICTORY"} else {"DEFEAT"}},_seconds];
   };
@@ -69,7 +70,6 @@ while {!isNull _hud} do {
   };
   if (alive player) then {
    if (cameraView isEqualTo "EXTERNAL") then { player switchCamera "INTERNAL"; };
-   player allowDamage (!BL_pending && {_phase isEqualTo "ACTIVE"} && {serverTime >= (player getVariable ["BL_protectedUntil",0])});
    private _damage = damage player;
    if (_damage > BL_lastDamage) then { BL_hurtAt = diag_tickTime; };
    if (!BL_pending && {diag_tickTime - BL_hurtAt > 6} && {_damage > 0}) then { player setDamage (0 max (_damage-0.025)); };

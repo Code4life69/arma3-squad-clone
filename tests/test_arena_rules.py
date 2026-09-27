@@ -54,4 +54,18 @@ class Domination(unittest.TestCase):
     def test_owned_point_cannot_repeat_capture_award(self):
         self.assertEqual(self.step(0,10,1,0),[0,10,False,False])
 
+
+class RespawnProtocol(unittest.TestCase):
+    def ack(self,args): return call('Functions/Core/fn_deploymentAckValid.sqf',args)
+    def delivery(self,args): return call('Functions/Core/fn_deliveryAction.sqf',args)
+    def test_only_outstanding_ticket_and_round_are_accepted(self):
+        self.assertTrue(self.ack([7,2,7,2,2]))
+        for args in [[7,2,6,2,2],[7,2,7,1,2],[7,2,7,2,3],[0,2,0,2,2]]:
+            self.assertFalse(self.ack(args))
+    def test_first_delivery_applies_kit(self): self.assertEqual(self.delivery([-1,-1,7,2]),2)
+    def test_retry_only_acknowledges_without_refilling(self): self.assertEqual(self.delivery([7,2,7,2]),1)
+    def test_delayed_old_delivery_is_rejected(self): self.assertEqual(self.delivery([8,2,7,2]),0)
+    def test_same_ticket_cannot_be_reused_for_another_round(self): self.assertEqual(self.delivery([7,2,7,3]),0)
+    def test_next_round_new_ticket_applies(self): self.assertEqual(self.delivery([7,2,8,3]),2)
+
 if __name__=='__main__': unittest.main()

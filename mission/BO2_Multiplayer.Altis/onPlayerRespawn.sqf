@@ -1,1 +1,2 @@
-if (hasInterface) then { [] spawn BL_fnc_prepare; };
+params ["_newUnit", "_oldUnit"];
+if (hasInterface) then { [_newUnit] spawn BL_fnc_prepare; };

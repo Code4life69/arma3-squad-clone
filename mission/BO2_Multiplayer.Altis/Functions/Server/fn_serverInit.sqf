@@ -10,6 +10,7 @@ BL_recentSpawns = [];
 BL_deathHeat = [];
 BL_tags = [];
 BL_botSerial = 0;
+BL_deliverySerial = 0;
 BL_round = 0;
 BL_uavUntil = [0,0];
 BL_counterUntil = [0,0];
@@ -17,12 +18,16 @@ BL_spawnQueue = [];
 west setFriend [east,0]; east setFriend [west,0];
 {
  private _name = ["respawn_west","respawn_east"] select _forEachIndex;
- createMarker [_name, _x]; _name setMarkerType "Empty";
-} forEach [[1000,1000,0],[1040,1000,0]];
+ if (!( _name in allMapMarkers)) then { createMarker [_name,_x]; };
+ _name setMarkerPos _x; _name setMarkerType "Empty";
+} forEach [[3520,13110,0],[3800,13110,0]];
 createMarker ["BL_arena",BL_center]; "BL_arena" setMarkerShape "ELLIPSE";
 "BL_arena" setMarkerSize [BL_radius,BL_radius]; "BL_arena" setMarkerBrush "Border";
 "BL_arena" setMarkerColor "ColorOrange";
 [] call BL_fnc_buildSpawns;
+if (count BL_spawns isEqualTo 0) then {
+ diag_log "[BLACKLINE][ERROR] No spawn candidates. Check Altis mission folder and arena geometry.";
+};
 [] call BL_fnc_resetMatch;
 addMissionEventHandler ["EntityKilled",{ _this call BL_fnc_killed; }];
 addMissionEventHandler ["HandleDisconnect",{

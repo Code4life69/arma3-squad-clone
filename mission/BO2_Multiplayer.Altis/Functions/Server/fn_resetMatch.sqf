@@ -15,6 +15,9 @@ BL_objectives = [
  private _unit = _x select 1;
  if (!isNull _unit && {alive _unit}) then {
   _unit setVariable ["BL_active",false,true];
+  _unit setVariable ["BL_delivery",[]];
+  _unit setVariable ["BL_confirmedDelivery",[-1,-1],true];
+  _unit hideObjectGlobal true;
   _unit setVariable ["BL_outSince",-1];
   _unit enableSimulationGlobal false;
   BL_spawnQueue pushBackUnique _unit;

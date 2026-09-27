@@ -1,9 +1,21 @@
 if (!hasInterface) exitWith {};
-waitUntil {sleep 0.1; !isNull player && {!isNil "BL_state"} && {!isNull findDisplay 46}};
+waitUntil {uiSleep 0.1; !isNull player && {!isNull findDisplay 46}};
+if (!isMultiplayer) exitWith {
+ hint "BLACKLINE requires multiplayer respawn. In Eden use Play > Play in Multiplayer (not single-player preview).";
+ diag_log "[BLACKLINE][ERROR] Single-player preview cannot run this multiplayer respawn mission.";
+};
+// Registration is independent of HUD creation and of receiving the first snapshot.
+[player] spawn BL_fnc_prepare;
+[] spawn BL_fnc_lifeLoop;
+private _deadline = diag_tickTime + 30;
+waitUntil {uiSleep 0.1; !isNil "BL_state" || {diag_tickTime > _deadline}};
+if (isNil "BL_state") then {
+ hint "BLACKLINE server startup is delayed. Check the RPT for [BLACKLINE] or Error in expression.";
+};
 enableSentences false;
 enableRadio false;
 showHUD [true,false,false,false,false,false,false,false,false,false,false];
-[] spawn BL_fnc_prepare;
+
 ("BL_HUD" call BIS_fnc_rscLayer) cutRsc ["BL_HUD","PLAIN"];
 [] spawn BL_fnc_hud;
 (findDisplay 46) displayAddEventHandler ["KeyDown",{

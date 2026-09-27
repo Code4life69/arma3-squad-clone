@@ -22,8 +22,10 @@ jobs:
         run: python -m unittest discover -s tests -p 'test_*.py' -v
       - name: Package mission
         run: python tools/package_mission.py
+      - name: Verify packed mission and checksums
+        run: python tests/verify_package.py
       - name: Check committed package matches source
-        run: git diff --exit-code -- releases/BLACKLINE-Multiplayer.zip
+        run: git diff --exit-code -- releases
       - uses: actions/upload-artifact@v4
         with:
           name: BLACKLINE-Multiplayer

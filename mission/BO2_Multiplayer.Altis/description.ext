@@ -7,6 +7,8 @@ respawn = 3;
 respawnDelay = 3;
 respawnOnStart = -1;
 respawnDialog = 0;
+respawnTemplates[] = {};
+respawnButton = 0;
 disabledAI = 1;
 joinUnassigned = 0;
 reviveMode = 0;
@@ -27,14 +29,14 @@ class Params {
 class CfgFunctions {
  class BL {
   tag="BL";
-  class Core { file="Functions\Core"; class config { preInit=1; }; class captureStep {}; };
+  class Core { file="Functions\Core"; class config { preInit=1; }; class captureStep {}; class deploymentAckValid {}; class deliveryAction {}; };
   class Server { file="Functions\Server";
    class serverInit {}; class serverLoop {}; class request {}; class publish {}; class resetMatch {};
    class killed {}; class award {}; class objectives {}; class bots {}; class deploy {}; class streak {};
   };
   class Spawn { file="Functions\Spawn"; class buildSpawns {}; class selectSpawn {}; };
   class Client { file="Functions\Client";
-   class clientInit {}; class prepare {}; class receive {}; class loadout {}; class hud {}; class menu {};
+   class clientInit {}; class lifeLoop {}; class prepare {}; class receive {}; class loadout {}; class hud {}; class menu {};
    class drawMap {}; class event {}; class classCost {}; class saveClass {}; class scoreboard {};
   };
  };

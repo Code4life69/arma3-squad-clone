@@ -2,6 +2,16 @@
 
 No Arma executable is available in the build environment. Every unchecked item below is pending, not an implied pass. Run first with vanilla Arma 3, `-showScriptErrors`, and a fresh RPT.
 
+## Repair regression cases — pending engine verification
+
+- [ ] Install the new PBO and remove/replace the old mission copy; launch a hosted multiplayer session, not SP preview.
+- [ ] Die and respawn at least ten times; each RPT cycle has Registering life → Applied delivery → Confirmed delivery.
+- [ ] Delay a delivery/ACK: the server resends the same ticket without moving/refilling an already applied life.
+- [ ] Respawn during intermission and at a round transition; no stale ticket activates a new life.
+- [ ] Cause a HUD initialization error in a development copy: deployment and eventual removal of protection still work.
+- [ ] Join slowly, before the first state snapshot arrives; registration retries and warmup waits for an active human.
+- [ ] Confirm the mission loads without the original suspected corruption error. If it fails, save the exact message and RPT.
+
 ## Start and display
 
 - [ ] Open the Altis mission in Eden; no config/import error. Confirm all 12 slots and lobby parameters.
